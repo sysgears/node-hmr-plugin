@@ -1,0 +1,12 @@
+{
+  "typescript.tsdk": "tssdk/typescript/lib",
+  "eslint.validate": [
+    "javascript",
+    {
+      "language": "typescript",
+      "autoFix": true
+    }
+  ],
+  "eslint.nodePath": "tssdk",
+  "eslint.trace.server": "verbose"
+}

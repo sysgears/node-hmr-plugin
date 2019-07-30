@@ -1,4 +1,3 @@
-/.vscode
 /.history
 /.npmrc
 node_modules
@@ -7,4 +6,4 @@ lib
 .npmrc
 *.log
 
-!/tssdk/lib
+!/tssdk/**/lib
