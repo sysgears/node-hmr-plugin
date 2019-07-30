@@ -34,6 +34,8 @@
     "babel-jest": "^24.8.0",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-jest": "^22.14.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "husky": "^3.0.2",
     "jest": "^24.8.0",
     "lint-staged": "^9.2.1",
@@ -50,9 +52,12 @@
   "prettier": {
     "printWidth": 120,
     "singleQuote": true,
-    "parser": "babel"
+    "parser": "typescript"
   },
   "husky": {
     "pre-commit": "lint-staged"
+  },
+  "dependencies": {
+    "eslint-plugin-prettier": "^3.1.0"
   }
 }
