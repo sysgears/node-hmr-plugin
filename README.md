@@ -1,2 +1,8 @@
-# node-hmr-plugin
-Webpack plugin for running node process in development mode with HMR
+# Node HMR Webpack Plugin
+
+## License
+
+Copyright © 2019 [SysGears (Cyprus) Limited]. This source code is licensed under the [MIT] license.
+
+[MIT]: LICENSE
+[SysGears (Cyprus) Limited]: http://sysgears.com

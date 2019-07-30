@@ -1,0 +1,10 @@
+/.vscode
+/.history
+/.npmrc
+node_modules
+lib
+.idea
+.npmrc
+*.log
+
+!/tssdk/lib

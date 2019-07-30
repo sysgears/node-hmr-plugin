@@ -1,0 +1,58 @@
+{
+  "name": "node-hmr-plugin",
+  "version": "1.0.0",
+  "description": "A Webpack plugin for running node process during development with HMR",
+  "repository": "https://github.com/sysgears/node-hmr-plugin.git",
+  "author": "Victor Vlasenko <victor.vlasenko@sysgears.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "clean": "rm -rf ./lib",
+    "build": "tsc -p tsconfig.build.json",
+    "watch": "tsc -p tsconfig.build.json -w",
+    "tests": "jest",
+    "tests:watch": "jest --watch",
+    "test": "yarn tests && yarn lint",
+    "lint": "eslint --fix **/*.ts"
+  },
+  "files": [
+    "lib/*.js",
+    "lib/*.d.ts",
+    "lib/*.map"
+  ],
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
+    "@babel/preset-typescript": "^7.3.3",
+    "@berry/pnpify": "^0.0.6",
+    "@types/jest": "^24.0.6",
+    "@types/node": "^11.11.3",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "babel-jest": "^24.8.0",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "husky": "^3.0.2",
+    "jest": "^24.8.0",
+    "lint-staged": "^9.2.1",
+    "prettier": "^1.18.2",
+    "typescript": "^3.5.2",
+    "webpack": "^4.38.0"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix -c tslint.json",
+      "git add"
+    ]
+  },
+  "prettier": {
+    "printWidth": 120,
+    "singleQuote": true,
+    "parser": "babel"
+  },
+  "husky": {
+    "pre-commit": "lint-staged"
+  }
+}
