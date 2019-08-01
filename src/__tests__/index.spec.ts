@@ -3,12 +3,12 @@ import * as path from 'path';
 import * as tmp from 'tmp';
 import webpack from 'webpack';
 
-import NodeHmrPlugin from '..';
+import NodeHmrPlugin, { LogLevel } from '..';
 
 tmp.setGracefulCleanup();
 
 const TEST_FILENAME = 'test.txt';
-const PLUGIN = new NodeHmrPlugin({ logLevel: 'error' });
+const PLUGIN = new NodeHmrPlugin({ logLevel: LogLevel.ERROR });
 (PLUGIN as any).testMode = true;
 
 describe('node-hmr-plugin tests', () => {

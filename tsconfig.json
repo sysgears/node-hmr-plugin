@@ -10,6 +10,7 @@
     "noImplicitAny": false,
     "experimentalDecorators": true,
     "pretty": true,
+    "strict": true,
     "removeComments": true
   },
   "exclude": [
