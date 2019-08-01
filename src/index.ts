@@ -3,36 +3,31 @@ import { Compiler } from 'webpack';
 import { spawn, ChildProcess } from 'child_process';
 import log from 'webpack-log';
 
-const PLUGIN_NAME = 'node-hmr-plugin';
-
-export enum LogLevel {
-  TRACE = 'trace',
-  DEBUG = 'debug',
-  INFO = 'info',
-  WARN = 'warn',
-  ERROR = 'error',
-  SILENT = 'silent'
-}
-
+/** Plugin options */
 export interface NodeHmrPluginOptions {
   // Command template string default: '{app}', can be for example '--inspect {app} some_arg'
   cmd?: string;
   // Exit code list that should be treated as signal to rerun app immediately, default: none
   restartOnExitCodes?: number[];
   // Log level, one of `trace`, `debug`, `info`, `warn`, `error`, `silent`, default: 'info'
-  logLevel?: LogLevel;
+  logLevel?: string;
 }
+
+/** The name of the plugin */
+const PLUGIN_NAME = 'node-hmr-plugin';
 
 interface NodeHmrPluginDefinedOptions {
   cmd: string;
   restartOnExitCodes: number[];
-  logLevel: LogLevel;
+  logLevel: string;
 }
 
+/**
+ * The class that manages Node app spawning and termination
+ */
 class AppLauncher {
   private app: ChildProcess | null = null;
   private lastExitCode: number = 0;
-  private isExitHookRegistered: boolean = false;
   private restartOnExitCodes: number[];
   private logger: any;
 
@@ -41,78 +36,75 @@ class AppLauncher {
     this.restartOnExitCodes = restartOnExitCodes;
   }
 
-  private _ensureAppExitOnProcessExit() {
-    if (!this.isExitHookRegistered) {
-      process.on('exit', () => {
-        if (this.app) {
-          this.app.kill('SIGTERM');
-          this.app = null;
-        }
-      });
-      this.isExitHookRegistered = true;
+  public terminateApp() {
+    if (this.app) {
+      this.app.kill('SIGTERM');
+      this.app = null;
     }
   }
 
-  public runApp(appPath: string, cmd: string, onExitCallback: Function | null) {
-    this._ensureAppExitOnProcessExit();
+  public runApp(appPath: string, cmd: string) {
+    if (!this.app) {
+      const args = cmd.split(' ').map(str => (str === '{app}' ? appPath : str));
+      this.app = spawn(process.execPath, [...args], {
+        stdio: [0, 1, 2],
+        env: { ...process.env, LAST_EXIT_CODE: `${this.lastExitCode}` }
+      });
 
-    const args = cmd.split(' ').map(str => (str === '{app}' ? appPath : str));
-    this.app = spawn(process.execPath, [...args], {
-      stdio: [0, 1, 2],
-      env: { ...process.env, LAST_EXIT_CODE: `${this.lastExitCode}` }
-    });
-    this.logger.info(`${['node', ...args].join(' ')}, env: { LAST_EXIT_CODE: ${this.lastExitCode} }`);
+      this.logger.info(`${['node', ...args].join(' ')}, env: { LAST_EXIT_CODE: ${this.lastExitCode} }`);
 
-    this.app.on('exit', (code: number): void => {
-      this.app = null;
-      this.lastExitCode = code;
-      this.logger.info(`Node app stopped, exit code:`, code);
-      if (this.restartOnExitCodes && this.restartOnExitCodes.includes(this.lastExitCode)) {
-        this.runApp(appPath, cmd, onExitCallback);
-      } else if (onExitCallback) {
-        onExitCallback();
-      }
-    });
+      this.app.on('exit', (exitCode: number): void => {
+        this.app = null;
+        this.lastExitCode = exitCode;
+        this.logger.info(`Node app stopped, exit code:`, exitCode);
+        if (this.restartOnExitCodes && this.restartOnExitCodes.includes(exitCode)) {
+          this.runApp(appPath, cmd);
+        }
+      });
+    }
   }
 }
 
+/** Node HMR Webpack Plugin */
 class NodeHmrPlugin {
   private options: NodeHmrPluginDefinedOptions;
   private isWatching: boolean;
-  private testMode: boolean;
   private launcher: AppLauncher;
 
   public constructor(options: NodeHmrPluginOptions = {}) {
     this.options = {
       cmd: options.cmd || '{app}',
       restartOnExitCodes: options.restartOnExitCodes || [],
-      logLevel: options.logLevel || LogLevel.INFO
+      logLevel: options.logLevel || 'info'
     };
     this.isWatching = false;
-    this.testMode = false;
 
     const logger = log({ name: PLUGIN_NAME, level: this.options.logLevel });
     this.launcher = new AppLauncher(logger, this.options.restartOnExitCodes || []);
   }
 
   public apply(compiler: Compiler): void {
+    compiler.hooks.watchClose.tap(PLUGIN_NAME, () => {
+      this.launcher.terminateApp();
+      this.isWatching = false;
+    });
+
     compiler.hooks.watchRun.tapAsync(PLUGIN_NAME, (_, callback) => {
       this.isWatching = true;
       callback();
     });
 
-    compiler.hooks.afterEmit.tapAsync(PLUGIN_NAME, (_, callback) => {
-      if (this.isWatching && compiler.options.output && compiler.options.output.filename) {
-        const appPath = path.join(compiler.outputPath, compiler.options.output.filename);
-        this.launcher.runApp(appPath, this.options.cmd, this.testMode ? callback : null);
-        if (!this.testMode) {
-          callback();
-        }
-      } else {
-        callback();
+    compiler.hooks.afterEmit.tapAsync(PLUGIN_NAME, (compilation, callback) => {
+      if (this.isWatching) {
+        const outputFilename = compilation.chunks[0].files[0];
+        const appPath = path.join(compiler.outputPath, outputFilename);
+        this.launcher.runApp(appPath, this.options.cmd);
       }
+      callback();
     });
   }
 }
 
 export default NodeHmrPlugin;
+
+module.exports = NodeHmrPlugin;

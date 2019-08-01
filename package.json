@@ -5,30 +5,33 @@
   "repository": "https://github.com/sysgears/node-hmr-plugin.git",
   "author": "Victor Vlasenko <victor.vlasenko@sysgears.com>",
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "lib/link.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "clean": "rm -rf ./lib",
-    "build": "tsc -p tsconfig.build.json",
-    "watch": "tsc -p tsconfig.build.json -w",
+    "build": "pnpify tsc -p tsconfig.build.json",
+    "watch": "pnpify tsc -p tsconfig.build.json -w",
     "tests": "jest",
     "tests:watch": "jest --watch",
     "test": "yarn tests && yarn lint",
-    "lint": "eslint --fix **/*.ts"
+    "lint": "eslint --fix src/**/*.ts",
+    "prepack": "yarn clean && yarn build",
+    "release": "yarn npm publish"
   },
   "files": [
-    "lib/*.js",
-    "lib/*.d.ts",
-    "lib/*.map"
+    "lib/index.js",
+    "lib/index.d.ts",
+    "lib/index.js.map"
   ],
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-transform-modules-commonjs": "^7.4.4",
     "@babel/preset-typescript": "^7.3.3",
-    "@berry/pnpify": "^0.0.6",
+    "@berry/pnpify": "^0.1.0",
     "@types/jest": "^24.0.6",
     "@types/node": "^11.11.3",
+    "@types/tmp": "^0.1.0",
     "@types/webpack": "^4.32.1",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
@@ -62,5 +65,13 @@
   },
   "dependencies": {
     "webpack-log": "^2.0.0"
+  },
+  "publishConfig": {
+    "main": "lib/index.js"
+  },
+  "dependenciesMeta": {
+    "webpack": {
+      "unplugged": true
+    }
   }
 }

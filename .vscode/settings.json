@@ -1,5 +1,5 @@
 {
-  "typescript.tsdk": "tssdk/typescript/lib",
+  "typescript.tsdk": ".vscode/pnpify/typescript/lib",
   "eslint.validate": [
     "javascript",
     {
@@ -7,6 +7,6 @@
       "autoFix": true
     }
   ],
-  "eslint.nodePath": "tssdk",
+  "eslint.nodePath": ".vscode/pnpify",
   "eslint.trace.server": "verbose"
 }

@@ -6,4 +6,4 @@ lib
 .npmrc
 *.log
 
-!/tssdk/**/lib
+!/.vscode/**/lib

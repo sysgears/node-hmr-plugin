@@ -306,36 +306,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@berry/fslib@npm:0.0.7":
-  version: 0.0.7
-  resolution: "@berry/fslib@npm:0.0.7"
+"@berry/fslib@npm:0.1.0":
+  version: 0.1.0
+  resolution: "@berry/fslib@npm:0.1.0"
   dependencies:
-    "@berry/libzip": "npm:0.0.4"
-  checksum: 7fac3ec5376d7c253fe154f2c0d495fed8b9fc2ecb201b21ee1c0486ba90e9a2f7b56fb15da20bf8449542e10e6b78d809279b4997766dc22a25260e92ab5810
+    "@berry/libzip": "npm:0.1.0"
+  checksum: fbb3852347d92a8200098c871667dd597c454705003c6e5926c636b8684241039e914f70432cde9188847d88f5d84d08825bbf92c6d6d7469b424601f37f168c
   languageName: node
   linkType: hard
 
-"@berry/libzip@npm:0.0.4":
-  version: 0.0.4
-  resolution: "@berry/libzip@npm:0.0.4"
-  checksum: 044ff6935cfff2c9abfff07045032e5390c322cf26b0f277f4ae5ffb54d389712f5ec1d602c17faaf73d8a712ca780483b81c83fc69b3c41d18146dcf44b81ea
+"@berry/libzip@npm:0.1.0":
+  version: 0.1.0
+  resolution: "@berry/libzip@npm:0.1.0"
+  checksum: fbbe924b73edf3ac0bb607993e25ef420d9178fe5b99c7342bf0fd51852997793ee4f3c8a33f1e6cdc630e064db6a85c2ce8fb41f54fe9aaf8857eef19bbed20
   languageName: node
   linkType: hard
 
-"@berry/pnpify@npm:^0.0.6":
-  version: 0.0.6
-  resolution: "@berry/pnpify@npm:0.0.6"
+"@berry/pnpify@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@berry/pnpify@npm:0.1.0"
   dependencies:
-    "@berry/fslib": "npm:0.0.7"
+    "@berry/fslib": "npm:0.1.0"
     cross-spawn: "npm:^6.0.5"
   peerDependencies:
+    eslint: "*"
     typescript: "*"
   peerDependenciesMeta:
+    eslint:
+      optional: true
     typescript:
       optional: true
   bin:
     pnpify: ./lib/bin.js
-  checksum: 7bb501132f017bc2a253acae5c0f3cb7183a7658cc16370c0dc55821157782c020b0b334af0b933bc4c14505facad10ad67f6291a5142a626f142aab09d71744
+  checksum: 91cf425bc72200a0a62191ed564e3bfd112409f3d68bff6b7b78476b83f8d01bea7e58d9bb37d4d0501e81aa2a47c30f12101c2d18808d2e042235648027bdd7
   languageName: node
   linkType: hard
 
@@ -707,6 +710,13 @@ __metadata:
   version: 1.0.4
   resolution: "@types/tapable@npm:1.0.4"
   checksum: 61e802c2793294b7a3b6a99800b0cd31041ea9980bb42da147de0055b9a90693a08d82f5e3a63f166d8c4c0ee9f020934d0c0d67df854b6bf03c66cd3c96eaed
+  languageName: node
+  linkType: hard
+
+"@types/tmp@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@types/tmp@npm:0.1.0"
+  checksum: 8f5132c25ea5cf18e9694d807628fb6d654cca303de0a440197807ffabe7ed3edf2e95fbfe45d40e432f625fb2ae5ecc8e7d3f35c5be127bdcf375f46d037675
   languageName: node
   linkType: hard
 
@@ -5237,9 +5247,10 @@ __metadata:
     "@babel/plugin-proposal-class-properties": "npm:^7.4.4"
     "@babel/plugin-transform-modules-commonjs": "npm:^7.4.4"
     "@babel/preset-typescript": "npm:^7.3.3"
-    "@berry/pnpify": "npm:^0.0.6"
+    "@berry/pnpify": "npm:^0.1.0"
     "@types/jest": "npm:^24.0.6"
     "@types/node": "npm:^11.11.3"
+    "@types/tmp": "npm:^0.1.0"
     "@types/webpack": "npm:^4.32.1"
     "@typescript-eslint/eslint-plugin": "npm:^1.13.0"
     "@typescript-eslint/parser": "npm:^1.13.0"
@@ -5257,6 +5268,9 @@ __metadata:
     wait-for-expect: "npm:^1.2.0"
     webpack: "npm:^4.38.0"
     webpack-log: "npm:^2.0.0"
+  dependenciesMeta:
+    webpack:
+      unplugged: true
   languageName: unknown
   linkType: soft
 
