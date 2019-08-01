@@ -1,6 +1,6 @@
 {
   "name": "node-hmr-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Webpack plugin for running node process during development with HMR",
   "repository": "https://github.com/sysgears/node-hmr-plugin.git",
   "author": "Victor Vlasenko <victor.vlasenko@sysgears.com>",
@@ -15,10 +15,11 @@
     "tests:watch": "jest --watch",
     "test": "yarn tests && yarn lint",
     "lint": "eslint --fix src/**/*.ts",
-    "prepack": "yarn clean && yarn build",
     "release": "yarn npm publish"
   },
   "files": [
+    "README.md",
+    "LICENSE",
     "lib/index.js",
     "lib/index.d.ts",
     "lib/index.js.map"
