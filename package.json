@@ -5,7 +5,7 @@
   "repository": "https://github.com/sysgears/node-hmr-plugin.git",
   "author": "Victor Vlasenko <victor.vlasenko@sysgears.com>",
   "license": "MIT",
-  "main": "lib/link.js",
+  "main": "src/boot-dev.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "clean": "rm -rf ./lib",
@@ -29,6 +29,7 @@
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/plugin-transform-modules-commonjs": "^7.4.4",
     "@babel/preset-typescript": "^7.3.3",
+    "@babel/register": "^7.5.5",
     "@berry/pnpify": "^0.1.0",
     "@types/jest": "^24.0.6",
     "@types/node": "^11.11.3",

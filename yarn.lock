@@ -267,6 +267,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/register@npm:^7.5.5":
+  version: 7.5.5
+  resolution: "@babel/register@npm:7.5.5"
+  dependencies:
+    core-js: "npm:^3.0.0"
+    find-cache-dir: "npm:^2.0.0"
+    lodash: "npm:^4.17.13"
+    mkdirp: "npm:^0.5.1"
+    pirates: "npm:^4.0.0"
+    source-map-support: "npm:^0.5.9"
+  peerDependencies:
+    "@babel/core": ^7.0.0-0
+  checksum: 425be9237e196ca12dab221a71034609752e3121fb03938b3776167c9c7cc24b3decb5a74c455b2a7d1217225634ab60a9d5b629af185fd520c23c03122b41ca
+  languageName: node
+  linkType: hard
+
 "@babel/template@npm:^7.1.0, @babel/template@npm:^7.4.0, @babel/template@npm:^7.4.4":
   version: 7.4.4
   resolution: "@babel/template@npm:7.4.4"
@@ -1984,6 +2000,13 @@ __metadata:
   version: 0.1.1
   resolution: "copy-descriptor@npm:0.1.1"
   checksum: 9b90bc494fd0452acd683f66745dea8a6f28619205fefbc2598d122b728e43b21331ab8f6b7cf51a74ef85c61874b01955974762767ee28f44aaa3fb332ce76c
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.0.0":
+  version: 3.1.4
+  resolution: "core-js@npm:3.1.4"
+  checksum: 3162c0a487cc814578580612db330992d44ee4e0900ba3189a5f99b791e09bcd22530a021449ee0d6eb2027ac8c026621bb8fcf9577a8dfd3fee3197f86dfb97
   languageName: node
   linkType: hard
 
@@ -5247,6 +5270,7 @@ __metadata:
     "@babel/plugin-proposal-class-properties": "npm:^7.4.4"
     "@babel/plugin-transform-modules-commonjs": "npm:^7.4.4"
     "@babel/preset-typescript": "npm:^7.3.3"
+    "@babel/register": "npm:^7.5.5"
     "@berry/pnpify": "npm:^0.1.0"
     "@types/jest": "npm:^24.0.6"
     "@types/node": "npm:^11.11.3"
@@ -5920,7 +5944,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pirates@npm:^4.0.1":
+"pirates@npm:^4.0.0, pirates@npm:^4.0.1":
   version: 4.0.1
   resolution: "pirates@npm:4.0.1"
   dependencies:
@@ -6786,6 +6810,16 @@ __metadata:
     buffer-from: "npm:^1.0.0"
     source-map: "npm:^0.6.0"
   checksum: cc9afe7ea15d244aacd257a607548d04fe69f011cbb2372e4fe82eab31f927d3964a3917941d3e7f161fddd01eeac22e2364163bfa06729efe0f1e7bb9e00fd3
+  languageName: node
+  linkType: hard
+
+"source-map-support@npm:^0.5.9":
+  version: 0.5.13
+  resolution: "source-map-support@npm:0.5.13"
+  dependencies:
+    buffer-from: "npm:^1.0.0"
+    source-map: "npm:^0.6.0"
+  checksum: 28e136eed951e0c81393007a0d3da88c2d35a62193ca4bc0791f381fd5fb108b95e806e69b6b4b3fd1124dfd7b15c01e04d1e2a940352893a522d03f81383a02
   languageName: node
   linkType: hard
 
